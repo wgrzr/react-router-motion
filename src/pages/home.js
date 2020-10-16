@@ -1,12 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
 import ProgressiveImage from "react-progressive-image";
+
+
+const transition = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
 
 const Home = ({ imageDetails, image }) => (
   <>
     <main>
-      <div className='container'>
+      <motion.div
+        exit={{ opacity: 0 }}
+        transition={transition} className='container'>
         <div className='row center'>
           <div className='image-container'>
             <div
@@ -24,7 +29,8 @@ const Home = ({ imageDetails, image }) => (
                     placeholder={require("../images/compressed-image.jpg")}>
                     {(src) => (
                       <motion.img
-                        whileHover={{scale: 1.1}}
+                        whileHover={{ scale: 1.1 }}
+                        transition={transition}
                         src={src}
                         alt='Yasmeen Tariq'
                       />
@@ -33,16 +39,19 @@ const Home = ({ imageDetails, image }) => (
                 </Link>
               </div>
             </div>
-            <div className='information'>
+            <motion.div
+              exit={{ opacity: 0 }}
+              transition={transition}
+              className='information'>
               <div className='title'>Yasmeen Tariq</div>
               <div className='location'>
                 <span>28.538336</span>
                 <span>-81.379234</span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </main>
   </>
 );
