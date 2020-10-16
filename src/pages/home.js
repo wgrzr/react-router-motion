@@ -1,5 +1,6 @@
-import * as React from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from 'framer-motion'
 import ProgressiveImage from "react-progressive-image";
 
 const Home = ({ imageDetails, image }) => (
@@ -17,10 +18,17 @@ const Home = ({ imageDetails, image }) => (
               }}>
               <div className='frame'>
                 <Link to={`/model/yasmeen-tariq`}>
+                  {/* progressive loading from lower quality img to higher quality <ProgressiveImage ...></ProgressiveImage> */}
                   <ProgressiveImage
                     src={require("../images/yasmeen.webp")}
                     placeholder={require("../images/compressed-image.jpg")}>
-                    {(src) => <img src={src} alt='Yasmeen Tariq' />}
+                    {(src) => (
+                      <motion.img
+                        whileHover={{scale: 1.1}}
+                        src={src}
+                        alt='Yasmeen Tariq'
+                      />
+                    )}
                   </ProgressiveImage>
                 </Link>
               </div>
