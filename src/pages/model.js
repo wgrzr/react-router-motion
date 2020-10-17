@@ -1,15 +1,11 @@
 import React from "react";
-
-
 import { motion } from 'framer-motion';
 //Components
 import ScrollForMore from "../components/scrollForMore";
 //Ease
-
 const transition = { duration: 1.4, ease: [0.6, 0.01, -0.05, 0.9] };
 
 //variants
-
 const firstName = {
   animate: {
     transition: {
@@ -53,7 +49,15 @@ const Model = ({ imageDetails }) =>
         <div className='row center top-row'>
           <div className='top'>
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: { delay: 1.2, ...transition },
+              }}
               className='details'>
               <div className='location'>
                 <span>28.538336</span>
