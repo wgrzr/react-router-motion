@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from "react";
+import { motion, useTransform, useViewportScroll } from 'framer-motion';
 //Components
 import ScrollForMore from "../components/scrollForMore";
 //Ease
@@ -39,8 +39,25 @@ const letter = {
 
 const Model = ({ imageDetails }) =>
 {
+  const { scrollYProgress } = useViewportScroll();
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+
+  const [canScroll, setCanScroll] = useState(false);
+
+  useEffect(() =>
+  {
+    if (canScroll === false)
+    {
+      document.querySelector('body').classList.add('no-scroll');
+    } else
+    {
+      document.querySelector('body').classList.remove('no-scroll');
+    }
+  }, [canScroll]);
+
   return (
     <motion.div
+      onAnimationComplete={() => setCanScroll(true)}
       initial='initial'
       animate='animate'
       exit='exit'
@@ -107,6 +124,7 @@ const Model = ({ imageDetails }) =>
                 className='thumbnail-single'>
                 <div className='frame-single'>
                   <motion.img
+                    style={{ scale: scale }}
                     initial={{ scale: 1.1 }}
                     animate={{
                       transition: { delay: .2, ...transition },
